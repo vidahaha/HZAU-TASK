@@ -10,4 +10,17 @@ html {
 
 body{
 	height:100%;
+	box-sizing: border-box;
+	color: #fff;
+}
+
+input {
+	border: none;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-progress-appearance: none;
+	background: none;
+	outline: none;
+	display: block;
 }
