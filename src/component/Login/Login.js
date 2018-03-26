@@ -3,13 +3,16 @@ import ReactDom from 'react-dom';
 import $ from 'jquery';
 import axios from 'axios';
 import host from '@/host.js';
+import Cookies from "js-cookie";
 import './Login.less';
+
 class Login extends Component {
 
 	componentWillMount() {
 		let h = window.innerHeight;
 		$('body').height(h);
 	}
+
 
 	loginSubmit = (e) => {
 		let name = $('#username').val();  // jquery dom 方便一些
@@ -21,11 +24,43 @@ class Login extends Component {
 			return false;
 		}
 
-		// axios.post(host+'login', {
-		// 	name,
-		// 	password,
-		// });
+		var csrftoken = Cookies.get('csrfToken');
+		
+		function csrfSafeMethod(method) {
+			// these HTTP methods do not require CSRF protection
+			return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		$.ajaxSetup({
+			beforeSend: function(xhr, settings) {
+				if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+					xhr.setRequestHeader('x-csrf-token', csrftoken);
+				}
+			},
+			
+		});
 
+		$.ajax({
+			type: 'post',
+			url: host+'login',
+			data: {name, password},
+			success: function(res){
+
+			}
+		});
+			
+		// let csrftoken = Cookies.get('csrfToken');
+		// axios.defaults.withCredentials = true
+		// axios.defaults.headers.post['x-csrf-token'] = csrftoken;
+	
+		// axios({
+		// 	method: "POST",
+		// 	url: host +'login',
+		// 	data:{
+		// 			name,
+		// 			password,
+		// 	},
+		// 	// crossDomain: true,
+		// });
 	}
 
 	render() {
