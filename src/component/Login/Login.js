@@ -23,44 +23,20 @@ class Login extends Component {
 			alert('请输入完整');
 			return false;
 		}
-
-		var csrftoken = Cookies.get('csrfToken');
-		
-		function csrfSafeMethod(method) {
-			// these HTTP methods do not require CSRF protection
-			return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-		}
-		$.ajaxSetup({
-			beforeSend: function(xhr, settings) {
-				if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-					xhr.setRequestHeader('x-csrf-token', csrftoken);
-				}
-			},
-			
-		});
-
-		$.ajax({
-			type: 'post',
-			url: host+'login',
-			data: {name, password},
-			success: function(res){
-
-			}
-		});
-			
-		// let csrftoken = Cookies.get('csrfToken');
-		// axios.defaults.withCredentials = true
-		// axios.defaults.headers.post['x-csrf-token'] = csrftoken;
 	
-		// axios({
-		// 	method: "POST",
-		// 	url: host +'login',
-		// 	data:{
-		// 			name,
-		// 			password,
-		// 	},
-		// 	// crossDomain: true,
-		// });
+		let csrftoken = Cookies.get('csrfToken');
+		axios.defaults.withCredentials = true
+		axios.defaults.headers.post['x-csrf-token'] = csrftoken;
+	
+		axios({
+			method: "POST",
+			url: host +'login',
+			data:{
+				name,
+				password,
+			},
+			// crossDomain: true,
+		});
 	}
 
 	render() {
