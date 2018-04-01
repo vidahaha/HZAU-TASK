@@ -2,7 +2,37 @@
     color: black;
     display: flex;
     flex-direction: column;
+    width: 150px;
+    height: 100%;
+    background: #24292e;
+    padding-top: 50px;
+    box-sizing: border-box;
     .item {
+        margin: 20px 0px;
+        font-size: 20px;
+        .item-list {
+            display: none;
+            font-size: 16px;
+            margin: 18px 20px 0px 20px;
+            border-top: 1px solid #d9e7f0;
+            padding-top: 1px;
+            a {
+                margin: 10px 0px;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+        a {
+            color: #ccc;
+            display: block;
+        }
+
+        &:hover {
+            .item-list {
+                display: block;
+            }
+        }
         
     }
 }

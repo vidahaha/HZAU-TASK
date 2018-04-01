@@ -14,7 +14,7 @@ class Index extends Component {
 
 	render() {
 	  return (
-		<div className="Index-warp">
+		<div className="Index-wrap">
       <Slider className="index-slide"></Slider>
 		</div>
 	  );
