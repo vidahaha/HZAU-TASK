@@ -16,6 +16,8 @@ class Slider extends Component {
             }, {
                 name: '团队信息',
                 list: ['团队整体记录'],
+            }, {
+                name: '关于我们'
             }],
         }
     }
